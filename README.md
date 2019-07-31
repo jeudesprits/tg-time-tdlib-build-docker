@@ -12,4 +12,4 @@ docker run -i --rm -v $HOME/dev/tg-time/lib:/libtdjson jeudesprits/tg-time-tdlib
 5. PROFIT!
 
 # 👨‍💻 Author 
-[jeudesprits](t.me/jeudesprits)
+[jeudesprits](https://t.me/jeudesprits)
