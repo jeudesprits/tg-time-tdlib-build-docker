@@ -9,3 +9,7 @@ Simple Docker container to build TDLib (Telegram Database library) on Docker for
 ```
 docker run -i --rm -v $HOME/dev/tg-time/lib:/libtdjson jeudesprits/tg-time-tdlib-build-docker:latest
 ```
+5. PROFIT!
+
+# 👨‍💻 Author 
+[jeudesprits](t.me/jeudesprits)
