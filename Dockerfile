@@ -41,4 +41,4 @@ RUN git clone https://github.com/tdlib/td.git \
     && php SplitSource.php --undo \
     && cd .. 
 
-CMD ["cp -L /td/tdlib/lib/libtdjson.so /libtdjson"]
+CMD ["mkdir /libtdjson && cp -L /td/tdlib/lib/libtdjson.so /libtdjson"]
