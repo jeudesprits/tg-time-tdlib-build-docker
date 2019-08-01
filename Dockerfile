@@ -1,4 +1,4 @@
-FROM debian:9-slim
+FROM debian:10-slim
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get install -y locales git \
     #
     # Install deps. to build TDLib (Telegram Database library)
-    && apt-get install -y make zlib1g-dev libssl-dev gperf php cmake clang libc++-dev \
+    && apt-get install -y make zlib1g-dev libssl-dev gperf php cmake clang libc++-dev libc++abi-dev \
     #
     # Clean up
     && apt-get autoremove -y \
