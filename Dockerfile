@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get install -y locales git \
     #
     # Install deps. to build TDLib (Telegram Database library)
-    && apt-get install -y make zlib1g-dev libssl-dev gperf php cmake clang libc++-dev libc++abi-dev \
+    && apt-get install -y make git zlib1g-dev libssl-dev gperf php cmake clang libc++-dev libc++abi-dev \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -26,19 +26,21 @@ ENV DEBIAN_FRONTEND=
 ENV LANG en_US.utf8
 
 RUN git clone https://github.com/tdlib/td.git \
-    && cd td \
-    && rm -rf build \
-    && mkdir build \
-    && cd build \
-    && export CXXFLAGS="-stdlib=libc++" \
-    && CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../tdlib .. \
-    && cmake --build . --target prepare_cross_compiling \
-    && cd .. \
-    && php SplitSource.php \
-    && cd build \
-    && cmake --build . --target install \
-    && cd .. \
-    && php SplitSource.php --undo \
-    && cd .. 
+&& cd td \
+&& git checkout v1.6.0 \
+&& rm -rf build \
+&& mkdir build \
+&& cd build \
+&& export CXXFLAGS="-stdlib=libc++" \
+&& CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../tdlib .. \
+&& cmake --build . --target prepare_cross_compiling \
+&& cd .. \
+&& php SplitSource.php \
+&& cd build \
+&& cmake --build . --target install \
+&& cd .. \
+&& php SplitSource.php --undo \
+&& cd .. \
+&&  ls -l td/tdlib
 
 CMD ["cp -L /td/tdlib/lib/libtdjson.so /libtdjson"]
